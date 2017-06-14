@@ -1,0 +1,197 @@
+[
+	{
+		"source": "contracts/Bio.sol",
+		"name": "Bio",
+		"address": "0xf6e302d5480bd8afce76945e660fa314c82e7396",
+		"abi": [
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "_email",
+						"type": "string"
+					}
+				],
+				"name": "UpdateEmail",
+				"outputs": [],
+				"payable": false,
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "_bio",
+						"type": "string"
+					}
+				],
+				"name": "UpdateBio",
+				"outputs": [],
+				"payable": false,
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"name": "user",
+						"type": "address"
+					}
+				],
+				"name": "IsOwner",
+				"outputs": [
+					{
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "_status",
+						"type": "string"
+					}
+				],
+				"name": "UpdateStatus",
+				"outputs": [],
+				"payable": false,
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"name": "_email",
+						"type": "string"
+					},
+					{
+						"name": "_bio",
+						"type": "string"
+					}
+				],
+				"payable": false,
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"name": "label",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"name": "activity",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"name": "time",
+						"type": "uint256"
+					}
+				],
+				"name": "Activity",
+				"type": "event"
+			}
+		]
+	},
+	{
+		"source": "contracts/BioDirectory.sol",
+		"name": "BioDirectory",
+		"address": "0x068579247c15e93a8feba2ecc72f5ad93a7260a7",
+		"abi": [
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "handle",
+						"type": "string"
+					},
+					{
+						"name": "email",
+						"type": "string"
+					},
+					{
+						"name": "bio",
+						"type": "string"
+					}
+				],
+				"name": "RegisterBio",
+				"outputs": [
+					{
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"name": "handle",
+						"type": "string"
+					}
+				],
+				"name": "GetBio",
+				"outputs": [
+					{
+						"name": "",
+						"type": "address"
+					}
+				],
+				"payable": false,
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"payable": false,
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"name": "handle",
+						"type": "string"
+					}
+				],
+				"name": "HandleUnavailable",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"name": "handle",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"name": "bio",
+						"type": "address"
+					}
+				],
+				"name": "HandleAllocated",
+				"type": "event"
+			}
+		]
+	}
+]
