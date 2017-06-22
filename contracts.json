@@ -2,7 +2,7 @@
 	{
 		"source": "contracts/Bio.sol",
 		"name": "Bio",
-		"address": "0xf6e302d5480bd8afce76945e660fa314c82e7396",
+		"address": "0x325cdc732be5b71441f11cd2af8be8b8492c0a04",
 		"abi": [
 			{
 				"constant": false,
@@ -27,6 +27,45 @@
 				],
 				"name": "UpdateBio",
 				"outputs": [],
+				"payable": false,
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "GetEmail",
+				"outputs": [
+					{
+						"name": "",
+						"type": "string"
+					}
+				],
+				"payable": false,
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "GetBio",
+				"outputs": [
+					{
+						"name": "",
+						"type": "string"
+					}
+				],
+				"payable": false,
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "GetStatus",
+				"outputs": [
+					{
+						"name": "",
+						"type": "string"
+					}
+				],
 				"payable": false,
 				"type": "function"
 			},
@@ -102,7 +141,7 @@
 	{
 		"source": "contracts/BioDirectory.sol",
 		"name": "BioDirectory",
-		"address": "0x068579247c15e93a8feba2ecc72f5ad93a7260a7",
+		"address": "0x19b25cbbc907fa2ae2ace58830b7c38118e8f4cb",
 		"abi": [
 			{
 				"constant": false,
@@ -131,7 +170,7 @@
 				"type": "function"
 			},
 			{
-				"constant": false,
+				"constant": true,
 				"inputs": [
 					{
 						"name": "handle",

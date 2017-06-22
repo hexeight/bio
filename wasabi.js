@@ -4,7 +4,7 @@ function startApp () {
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
             wasabiInit(xmlHttp.responseText);
     }
-    xmlHttp.open("GET", "/contracts.json", true);
+    xmlHttp.open("GET", "contracts.json", true);
     xmlHttp.send(null);
 
     function wasabiInit (abis) {
@@ -21,6 +21,8 @@ function startApp () {
                 }
             };
         });
+
+        initApp();
     }
 }
 
