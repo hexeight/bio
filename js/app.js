@@ -63,8 +63,7 @@ function GetStatus(handle, callback) {
     });
 }
 
-
-function initApp () {
+function initApp (web3Loaded) {
     var ViewModel = function() {
         var self = this;
 

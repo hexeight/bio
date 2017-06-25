@@ -1,4 +1,8 @@
-function startApp () {
+function startApp (web3Loaded) {
+
+    if (!web3Loaded);
+        window.location.href = window.location.href + "install.html";
+
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
@@ -22,7 +26,7 @@ function startApp () {
             };
         });
 
-        initApp();
+        initApp(web3Loaded);
     }
 }
 
@@ -33,15 +37,11 @@ window.addEventListener('load', function() {
     // Use Mist/MetaMask's provider
     window.web3 = new Web3(web3.currentProvider);
   } else {
-    InstallMetaMask();
+    startApp(false);
     return;
   }
-
+  console.log("TRUE");
   // Now you can start your app & access web3 freely:
-  startApp()
+  startApp(true)
 
 });
-
-function InstallMetaMask () {
-    alert("Oops! This Dapp needs Metamask to function.");
-}
