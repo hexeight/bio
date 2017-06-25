@@ -68,33 +68,44 @@ function initApp () {
     var ViewModel = function() {
         var self = this;
 
+        self.lookupHandle = ko.observable();
+        self.lookup = function () {
+            self.loadProfile(self.lookupHandle());
+        }
+
         self.handle = ko.observable();
         self.hash = ko.observable("");
         self.bio = ko.observable("");
-
-        self.load = ko.computed(function() {
-            if (self.handle() == undefined)
-                return;
-            console.log("Query for ", self.handle());
-            // Check if profile is valid, else navigate to 404
-            IsHandleAvailable(self.handle(), function (status, address) {
-                if (status)
-                    pager.navigate("#!/404");
-                else
-                    self.loadProfile(self.handle());
-            });
-        }, self);
+        self.bioVisible = ko.observable(false);
 
         self.loadProfile = function (handle) {
-            // Load Email
-            GetEmail(handle, function (email) {
-                self.hash(email);
-            });
-            // Load Bio
-            GetBio(handle, function (bio) {
-                self.bio(bio);
+            self.bioVisible(false);
+            if (handle == undefined)
+                return;
+            console.log("Query for ", handle);
+            // Check if profile is valid, else navigate to 404
+            IsHandleAvailable(handle, function (status, address) {
+                if (status) {
+                    self.bioVisible(false);
+                }
+                else {
+                    self.bioVisible(true);
+                    // Load Email
+                    GetEmail(handle, function (email) {
+                        self.hash(email);
+                    });
+                    // Load Bio
+                    GetBio(handle, function (bio) {
+                        self.bio(bio);
+                    });
+                }
             });
         }
+
+        self.load = ko.computed(function() {
+            if (self.lookupHandle() != undefined)
+                pager.navigate("#!/u/" + self.lookupHandle());
+        }, self);
 
         self.displayPic = ko.computed(function () {
             if (self.hash() != "")
@@ -106,7 +117,13 @@ function initApp () {
         self.rhandle = ko.observable("");
         self.remail = ko.observable("");
         self.rbio = ko.observable("");
-        
+        self.previewPic = ko.computed(function () {
+            if (self.remail() != "")
+                return "https://www.gravatar.com/avatar/" + md5(self.remail()) + "?s=250";
+            else
+                return "";
+        }, self);
+
         self.rreset = function () {
             self.rhandle("");
             self.remail("");
@@ -126,6 +143,12 @@ function initApp () {
                 });
             })
         }
+
+        self.userPageMatch = function (opts) {
+            if (opts.route.length > 1 && opts.route[0] == 'u')
+                self.loadProfile(opts.route[1]);
+        }
+        pager.onMatch.add(self.userPageMatch);
     };
 
     pager.Href.hash = '#!/';
