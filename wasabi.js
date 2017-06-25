@@ -1,7 +1,7 @@
 function startApp (web3Loaded) {
     console.log("Start app", web3Loaded);
     if (!web3Loaded)
-        window.location.href = window.location.href + "install.html";
+        window.location.href = window.location.host + "install.html";
 
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() { 

@@ -63,6 +63,22 @@ function GetStatus(handle, callback) {
     });
 }
 
+function IsBioOwner(address, callback) {
+    var b = Bio.at(address);
+    b.IsOwner.call(web3.eth.defaultAccount, {from: web3.eth.defaultAccount}, function (e,c) {
+        console.log("Is Owner", address, c);
+        callback(c);
+    });
+}
+
+function updateStatus(status, address, callback) {
+    var b = Bio.at(address);
+    b.UpdateStatus(status, { from: web3.eth.defaultAccount }, function (e, c) {
+        console.log("Status transaction:", c);
+        callback(e, c);
+    });
+}
+
 function initApp (web3Loaded) {
     var ViewModel = function() {
         var self = this;
@@ -76,9 +92,18 @@ function initApp (web3Loaded) {
         self.hash = ko.observable("");
         self.bio = ko.observable("");
         self.bioVisible = ko.observable(false);
+        self.IsOwner = ko.observable(false);
+        self.contractAddress = ko.observable();
+
+        self.bioReset = function () {
+            self.bioVisible(false);
+            self.IsOwner(false);
+            self.status("");
+            self.bio("");
+        }
 
         self.loadProfile = function (handle) {
-            self.bioVisible(false);
+            self.bioReset();
             if (handle == undefined)
                 return;
             console.log("Query for ", handle);
@@ -89,6 +114,8 @@ function initApp (web3Loaded) {
                 }
                 else {
                     self.bioVisible(true);
+                    self.handle(handle);
+                    self.contractAddress(address);
                     // Load Email
                     GetEmail(handle, function (email) {
                         self.hash(email);
@@ -97,6 +124,14 @@ function initApp (web3Loaded) {
                     GetBio(handle, function (bio) {
                         self.bio(bio);
                     });
+                    // Load Status
+                    GetStatus(handle, function (status) {
+                        self.status(status);
+                    });
+                    // Check ownership
+                    IsBioOwner(address, function (IsOwner) {
+                        self.IsOwner(IsOwner);
+                    })
                 }
             });
         }
@@ -141,6 +176,23 @@ function initApp (web3Loaded) {
                     self.rreset();
                 });
             })
+        }
+
+        self.status = ko.observable("");
+        self.draftStatus = ko.observable("");
+        self.publishStatus = function () {
+            updateStatus(self.draftStatus(), self.contractAddress(), function (e, tx) {
+                if (e) { alert("An error occured while publishing status: " + e); return; }
+            })
+            self.draftStatus("");
+        };
+
+        self.updateBio = function () {
+
+        }
+
+        self.updateEmail = function () {
+
         }
 
         self.userPageMatch = function (opts) {

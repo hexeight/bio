@@ -74,29 +74,43 @@
             <header>
                 <div class="container" id="maincontent" tabindex="-1">
                     <div class="row">
-                        <div class="panel panel-default" style="margin-top: 50px">
+                        <div class="panel panel-primary" style="margin-top: 50px">
                             <div class="panel-body">
                                 <center data-bind="visible: !bioVisible()">
                                     <p>Bio not found!</p>
                                 </center>
                                 <center data-bind="visible: bioVisible()">
-                                    <img class="img-responsive img-circle" data-bind="attr: { src: displayPic }" alt="">
+                                    <img class="img-responsive img-circle" style="border: 5px solid #aaa" data-bind="attr: { src: displayPic }" alt="">
                                     <div class="intro-text">
-                                        <h1 class="name" data-bind="text: handle"></h1>
-                                        <hr class="star-light">
-                                        <span class="skills" data-bind="text: bio"></span>
+                                        <h1 class="name" title="Handle" data-bind="text: handle"></h1>
+                                        <span class="lead" title="Bio" data-bind="text: bio"></span>
                                     </div>
                                 </center>
-                                <div>
-
+                                <center data-bind="visible: bioVisible()">
+                                    <div data-bind="visible: (status().length > 0) ? true : false">
+                                        <legend></legend>
+                                        <blockquote>
+                                            <p data-bind="text: status"></p>
+                                            <small>Published <cite title="Timestamp">25th June 2017</cite></small>
+                                        </blockquote>
+                                    </div>
+                                    <div data-bind="visible: (status().length > 0) ? false : true">
+                                        <i>Handler has never published a status.</i>
+                                    </div>
+                                </center>
+                                <div style="margin-top:20px" data-bind="visible: IsOwner">
+                                    <legend></legend>
+                                    <textarea data-bind="value: draftStatus" class="form-control" rows="3" id="textArea" placeholder="Write a new status..."></textarea>
+                                    <p class="text-right" style="margin-top: 5px">
+                                        <a data-bind="click: publishStatus" href="#" class="btn btn-primary align-right">Publish</a>
+                                    </p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-12">
-                            <div class="col-lg-8 col-lg-offset-2 text-center">
-                                <hr class="star-light">
-                                <p data-bind="text: status"></p>
-                            </div>
+
+
+                        <div style="text-align:center">
+                            Bio Contract address: <a target="_blank" data-bind="text: contractAddress, attr: { href: 'https://ropsten.etherscan.io/address/' + contractAddress() }"></a>
                         </div>
                     </div>
                 </div>
@@ -167,7 +181,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        Made with <3 <a href="http://0x8.in" target="_blank">0x8</a>
+                        Made with <3 <a href="http://0x8.in" target="_blank">0x8</a> | Powered by Ethereum (Ropsten Testnet)
                     </div>
                 </div>
             </div>
