@@ -1,6 +1,6 @@
 function startApp (web3Loaded) {
-
-    if (!web3Loaded);
+    console.log("Start app", web3Loaded);
+    if (!web3Loaded)
         window.location.href = window.location.href + "install.html";
 
     var xmlHttp = new XMLHttpRequest();
@@ -36,12 +36,10 @@ window.addEventListener('load', function() {
   if (typeof web3 !== 'undefined') {
     // Use Mist/MetaMask's provider
     window.web3 = new Web3(web3.currentProvider);
+    // Now you can start your app & access web3 freely:
+    startApp(true);
   } else {
     startApp(false);
     return;
   }
-  console.log("TRUE");
-  // Now you can start your app & access web3 freely:
-  startApp(true)
-
 });
