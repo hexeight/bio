@@ -1,7 +1,10 @@
 function startApp (web3Loaded) {
     console.log("Start app", web3Loaded);
     if (!web3Loaded)
-        window.location.href = "http://0x8.in/bio/install.html";
+    {
+        initApp(web3Loaded);
+        return;
+    }
 
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() { 

@@ -207,4 +207,7 @@ function initApp (web3Loaded) {
     pager.extendWithPage(app);
     ko.applyBindings(app);
     pager.start();
+
+    if (!web3Loaded)
+        pager.navigate("#!/install");
 }
