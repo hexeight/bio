@@ -2,7 +2,7 @@
 	{
 		"source": "contracts/Bio.sol",
 		"name": "Bio",
-		"address": "0x325cdc732be5b71441f11cd2af8be8b8492c0a04",
+		"address": "0xe7174b9533aafbc3a33da0b8a0d2a6ae060aaaf3",
 		"abi": [
 			{
 				"constant": false,
@@ -88,6 +88,19 @@
 				"type": "function"
 			},
 			{
+				"constant": true,
+				"inputs": [],
+				"name": "GetStatusTime",
+				"outputs": [
+					{
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"type": "function"
+			},
+			{
 				"constant": false,
 				"inputs": [
 					{
@@ -141,7 +154,7 @@
 	{
 		"source": "contracts/BioDirectory.sol",
 		"name": "BioDirectory",
-		"address": "0x19b25cbbc907fa2ae2ace58830b7c38118e8f4cb",
+		"address": "0x9f8e83d88de1490ce2a549d770b5883f2b5c8a0d",
 		"abi": [
 			{
 				"constant": false,

@@ -91,7 +91,7 @@
                                         <legend></legend>
                                         <blockquote>
                                             <p data-bind="text: status"></p>
-                                            <small>Published <cite title="Timestamp">25th June 2017</cite></small>
+                                            <small>Published <cite title="Timestamp" data-bind="text: statusTime().toString()"></cite></small>
                                         </blockquote>
                                     </div>
                                     <div data-bind="visible: (status().length > 0) ? false : true">

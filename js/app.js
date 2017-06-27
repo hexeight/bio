@@ -58,8 +58,16 @@ function GetStatus(handle, callback) {
             b.GetStatus.call({from: web3.eth.defaultAccount}, function (e,c) {
                 console.log("Status for", address, c);
                 callback(c);
-            })
+            });
         }
+    });
+}
+
+function GetStatusTime(address, callback) {
+    var b = Bio.at(address);
+    b.GetStatusTime.call({from: web3.eth.defaultAccount}, function (e,c) {
+        console.log("Status time for", address, c);
+        callback(c.toNumber());
     });
 }
 
@@ -99,6 +107,7 @@ function initApp (web3Loaded) {
             self.bioVisible(false);
             self.IsOwner(false);
             self.status("");
+            self.statusTime(new Date());
             self.bio("");
         }
 
@@ -127,6 +136,10 @@ function initApp (web3Loaded) {
                     // Load Status
                     GetStatus(handle, function (status) {
                         self.status(status);
+                    });
+                    // Load Status time
+                    GetStatusTime(address, function (time) {
+                        self.statusTime(new Date(time * 1000));
                     });
                     // Check ownership
                     IsBioOwner(address, function (IsOwner) {
@@ -179,6 +192,7 @@ function initApp (web3Loaded) {
         }
 
         self.status = ko.observable("");
+        self.statusTime = ko.observable(new Date());
         self.draftStatus = ko.observable("");
         self.publishStatus = function () {
             updateStatus(self.draftStatus(), self.contractAddress(), function (e, tx) {
